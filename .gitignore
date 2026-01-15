@@ -1,0 +1,72 @@
+# =========================
+# Node & Package Managers
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =========================
+# Vite / Build Outputs
+# =========================
+dist/
+build/
+.vite/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Coverage / Test
+# =========================
+coverage/
+
+# =========================
+# Uploads / Temp Files
+# =========================
+uploads/
+tmp/
+
+# =========================
+# Vercel
+# =========================
+.vercel/
+
+# =========================
+# Optional (Backend)
+# =========================
+*.pem
+*.key
