@@ -1,7 +1,8 @@
 import {
     createVisitRequestService,
     sendVisitRequestWhatsapp,
-    getAllVisitsForAdminService
+    getAllVisitsForAdminService,
+    getVisitorByMobileService
 } from "../services/requestService.js";
 import { uploadToS3 } from "../middleware/s3upload.js";
 
@@ -70,3 +71,34 @@ export const getAllVisitsForAdmin = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getVisitorByMobile = async (req, res, next) => {
+    try {
+        const { mobile } = req.params;
+
+        if (!mobile || !/^[6-9]\d{9}$/.test(mobile)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid mobile number"
+            });
+        }
+
+        const visitor = await getVisitorByMobileService(mobile);
+
+        if (!visitor) {
+            return res.status(404).json({
+                success: false,
+                found: false
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            found: true,
+            data: visitor
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+

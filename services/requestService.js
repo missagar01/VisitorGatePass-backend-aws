@@ -154,3 +154,32 @@ export const getAllVisitsForAdminService = async () => {
         throw err;
     }
 };
+
+
+export const getVisitorByMobileService = async (mobileNumber) => {
+    try {
+        const query = `
+            SELECT
+                visitor_name     AS "visitorName",
+                mobile_number    AS "mobileNumber",
+                visitor_address  AS "visitorAddress",
+                purpose_of_visit AS "purposeOfVisit",
+                person_to_meet   AS "personToMeet"
+            FROM visitors
+            WHERE mobile_number = $1
+            ORDER BY created_at DESC
+            LIMIT 1
+        `;
+
+        const { rows } = await pool.query(query, [mobileNumber]);
+
+        if (rows.length === 0) {
+            return null;
+        }
+
+        return rows[0];
+    } catch (err) {
+        err.message = "Failed to fetch visitor by mobile number";
+        throw err;
+    }
+};
