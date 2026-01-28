@@ -1,5 +1,5 @@
 import express from "express";
-import upload from "../middleware/s3upload.js";
+import upload from "../middleware/s3Upload.js";
 import { createVisitRequest, getAllVisitsForAdmin, getVisitorByMobile } from "../controllers/requestController.js";
 
 const router = express.Router();

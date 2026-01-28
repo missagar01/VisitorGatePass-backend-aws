@@ -31,15 +31,15 @@ export const fetchGatePassesService = async () => {
     }
 };
 
-export const closeGatePassService = async (id) => {
+export const closeGatePassService = async (id, visitorOutTime) => {
     try {
         const query = `
             UPDATE visitors
             SET
                 status = 'OUT',
                 gate_pass_closed = true,
-                visitor_out_time = CURRENT_TIME
-            WHERE id = $1
+                visitor_out_time = (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata')::time
+            WHERE id = $2
             RETURNING
                 visitor_name,
                 person_to_meet,

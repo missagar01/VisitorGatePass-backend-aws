@@ -123,6 +123,62 @@ export const sendVisitRequestWhatsapp = async (
     }
 };
 
+export const sendVisitRequestWhatsappToGroup = async (
+    person,
+    visitorDetails
+) => {
+    if (!process.env.VISITOR_GROUP_ID) {
+        console.warn("WhatsApp group skipped: VISITOR_GROUP_ID not found");
+        return;
+    }
+
+    const {
+        visitorName,
+        mobileNumber,
+        purposeOfVisit,
+        dateOfVisit,
+        timeOfEntry,
+        visitorAddress
+    } = visitorDetails;
+
+    // 👉 SAME message, JUST WITHOUT LOGIN LINK
+    const message = `
+*New Visitor Request Created*
+
+*Visitor Name:* ${visitorName}
+📱 *Visitor Mobile:* ${mobileNumber}
+🎯 *Purpose:* ${purposeOfVisit || "N/A"}
+📅 *Date of Visit:* ${dateOfVisit}
+⏰ *Time of Entry:* ${timeOfEntry}
+🏠 *Visitor Address:* ${visitorAddress || "N/A"}
+👤 *Meeting With:* ${person?.person_to_meet || "N/A"}
+    `;
+
+    try {
+        await axios.post(
+            `${process.env.MAYTAPI_BASE_URL}/${process.env.MAYTAPI_PRODUCT_ID}/${process.env.MAYTAPI_PHONE_ID}/sendMessage`,
+            {
+                to_number: process.env.VISITOR_GROUP_ID, // 👈 GROUP ID
+                message,
+                type: "text"
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-maytapi-key": process.env.MAYTAPI_API_KEY
+                },
+                timeout: 10000
+            }
+        );
+    } catch (err) {
+        console.error(
+            "⚠️ WhatsApp group send failed:",
+            err.response?.data || err.message
+        );
+    }
+};
+
+
 export const getAllVisitsForAdminService = async () => {
     try {
         const query = `

@@ -2,9 +2,10 @@ import {
     createVisitRequestService,
     sendVisitRequestWhatsapp,
     getAllVisitsForAdminService,
-    getVisitorByMobileService
+    getVisitorByMobileService,
+    sendVisitRequestWhatsappToGroup
 } from "../services/requestService.js";
-import { uploadToS3 } from "../middleware/s3upload.js";
+import { uploadToS3 } from "../middleware/s3Upload.js";
 
 export const createVisitRequest = async (req, res, next) => {
     try {
@@ -44,6 +45,15 @@ export const createVisitRequest = async (req, res, next) => {
         await sendVisitRequestWhatsapp(person, {
             visitorName,
             mobileNumber,
+            purposeOfVisit,
+            dateOfVisit,
+            timeOfEntry
+        });
+
+        await sendVisitRequestWhatsappToGroup(person, {
+            visitorName,
+            mobileNumber,
+            visitorAddress,
             purposeOfVisit,
             dateOfVisit,
             timeOfEntry
