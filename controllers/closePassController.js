@@ -37,6 +37,7 @@ export const closeGatePass = async (req, res, next) => {
 👤 *Visitor Name:* ${visit.visitor_name}
 👥 *Person To Meet:* ${visit.person_to_meet}
 📅 *Visit Date:* ${formattedVisitDate}
+⏰ *Time of Entry:* ${visit.time_of_entry}
 ⏰ *Exit Time:* ${formattedExitTime}
 🔒 *Gate Pass Status:* CLOSED
         `;
