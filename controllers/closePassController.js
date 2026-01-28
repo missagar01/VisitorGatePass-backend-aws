@@ -31,13 +31,18 @@ export const closeGatePass = async (req, res, next) => {
       ? visit.visitor_out_time.toString().slice(0, 5)
       : "-";
 
+    const formattedEntryTime = visit.time_of_entry
+      ? visit.time_of_entry.toString().slice(0, 5)
+      : "-";
+
+
     const message = `
 🚪 *Gate Pass CLOSED*
 
 👤 *Visitor Name:* ${visit.visitor_name}
 👥 *Person To Meet:* ${visit.person_to_meet}
 📅 *Visit Date:* ${formattedVisitDate}
-⏰ *Time of Entry:* ${visit.time_of_entry}
+⏰ *Time of Entry:* ${formattedEntryTime}
 ⏰ *Exit Time:* ${formattedExitTime}
 🔒 *Gate Pass Status:* CLOSED
         `;
