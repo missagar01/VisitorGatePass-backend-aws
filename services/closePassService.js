@@ -31,7 +31,7 @@ export const fetchGatePassesService = async () => {
     }
 };
 
-export const closeGatePassService = async (id, visitorOutTime) => {
+export const closeGatePassService = async (id) => {
     try {
         const query = `
             UPDATE visitors
@@ -39,11 +39,12 @@ export const closeGatePassService = async (id, visitorOutTime) => {
                 status = 'OUT',
                 gate_pass_closed = true,
                 visitor_out_time = (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata')::time
-            WHERE id = $2
+            WHERE id = $1
             RETURNING
                 visitor_name,
                 person_to_meet,
                 date_of_visit,
+                time_of_entry,
                 visitor_out_time
         `;
 
