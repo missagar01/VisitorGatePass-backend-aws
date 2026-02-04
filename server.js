@@ -6,6 +6,7 @@ import requestVisitRoutes from "./routes/requestRoutes.js";
 import approveRoutes from "./routes/approveRoutes.js";
 import closePassRoutes from "./routes/closePassRoutes.js";
 import personRoutes from "./routes/personRoutes.js";
+import loginRoutes from "./routes/loginRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 
@@ -19,6 +20,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+app.use("/api/login", loginRoutes);
 app.use("/api/visits", requestVisitRoutes);
 app.use("/api/approval", approveRoutes);
 app.use("/api/gatepass", closePassRoutes);
