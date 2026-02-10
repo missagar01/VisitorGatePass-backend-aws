@@ -45,6 +45,7 @@ export const createVisitRequest = async (req, res, next) => {
         await sendVisitRequestWhatsapp(person, {
             visitorName,
             mobileNumber,
+            visitorAddress,
             purposeOfVisit,
             dateOfVisit,
             timeOfEntry

@@ -82,6 +82,7 @@ export const sendVisitRequestWhatsapp = async (
     const {
         visitorName,
         mobileNumber,
+        visitorAddress,
         purposeOfVisit,
         dateOfVisit,
         timeOfEntry
@@ -93,6 +94,7 @@ export const sendVisitRequestWhatsapp = async (
 🎯 *Purpose:* ${purposeOfVisit || "N/A"}
 📅 *Date of Visit:* ${dateOfVisit}
 ⏰ *Time of Entry:* ${timeOfEntry}
+🏠 *Visitor Address:* ${visitorAddress || "N/A"}
 👤 *Meeting With:* ${person.person_to_meet}
 
 *Login for Approve:*
